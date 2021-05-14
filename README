@@ -1,0 +1,37 @@
+http://rise4fun.com/Z3Py/4BF, http://rise4fun.com/Z3Py/JEU
+https://rise4fun.com/Z3/tutorial/guide
+
+Stuff we Did:
+Basic understanding of solve
+
+Python 2.7.16 (default, Oct 10 2019, 22:02:15) 
+[GCC 8.3.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from z3 import *
+>>> a, b, c = Reals('a b c')
+>>> equations =  [ c == Sqrt(a**2 + b**2) ] 
+>>> print equations
+[c == (a**2 + b**2)**(1/2)]
+>>> import random
+>>> problem = [ a == random.randint(1,9) , b == random.randint(1,9) ]
+>>> solve(equations + problem)
+[c = 7.6157731058?, b = 3, a = 7]
+
+
+
+
+An expression if(A, B, C) in encoded in the Z3 Python API using If(A, B, C). Here is an example:
+
+F, H, A, B, C = Bools('F H A B C')
+s = Solver()
+s.add(F, H, If(A, B, C))
+print s
+
+Here is another example using "implies"
+
+F, H, A, B, C = Bools('F H A B C')
+s = Solver()
+s.add(F, H, Implies(A, B))
+print s
+
+After this we attempted to replicate the first example in z3. Despite the lengthy explanation in class we still struggled to convert the implication. Even following the paper’s explanation, we couldn’t seem to wrap our minds around the conversions. We did spend most of our time messing with the z3 documentation in order to better understand how to use it. We ended up using the python library for z3 as we thought it was the most straightforward and hopefully the fastest to work with. 
